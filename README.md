@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![DepEd Logo](assets/icons/Deped.jpg)
+![DepEd Logo](./server/assets/icons/Deped.jpg)
 
 **Automated Teacher Applicant Scoring & Document Generation System**
 
@@ -188,27 +188,27 @@ DIRECTORY = './'   # Server root directory
 ## 📸 Screenshots
 
 ### Main Dashboard
-![Main Dashboard](assets/screenshots/photo1.png)
+![Main Dashboard](./server/assets/screenshots/photo1.png)
 *Modern, intuitive dashboard with real-time score calculation*
 
 ### Print Preview
-![Print Preview](assets/screenshots/image.png)
+![Print Preview](./server/assets/screenshots/image.png)
 *Professional government-compliant document formatting*
 
 ### Mobile View
-![Screenshot 1](assets/screenshots/5.jpg)
+![Screenshot 1](./server/assets/screenshots/5.jpg)
 *Mobile dashboard interface*
 
-![Screenshot 2](assets/screenshots/4.jpg)
+![Screenshot 2](./server/assets/screenshots/4.jpg)
 *Score calculation on mobile*
 
-![Screenshot 3](assets/screenshots/3.jpg)
+![Screenshot 3](./server/assets/screenshots/3.jpg)
 *Applicant information entry*
 
-![Screenshot 4](assets/screenshots/2.jpg)
+![Screenshot 4](./server/assets/screenshots/2.jpg)
 *Evaluation criteria on mobile*
 
-![Screenshot 5](assets/screenshots/1.jpg)
+![Screenshot 5](./server/assets/screenshots/1.jpg)
 *Print-ready document generation*
 
 ## 🏗️ Technical Architecture
