@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMPSB Evaluation System</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        /* Default: hide print document */
+        .print-document {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #e0e0e0;
+            overflow-y: auto;
+            z-index: 10000;
+            padding: 80px 20px 40px 20px;
+        }
+        
+        /* When in print preview mode */
+        body.print-preview {
+            overflow: hidden !important;
+        }
+        
+        body.print-preview .dashboard {
+            display: none !important;
+        }
+        
+        body.print-preview .print-document {
+            display: block !important;
+        }
+        
+        .print-document-content {
+            background: white;
+            padding: 40px;
+            max-width: 8.5in;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            min-height: calc(100vh - 120px);
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                background: white !important;
+                margin: 0;
+                padding: 0;
+                overflow: visible !important;
+            }
+            
+            .dashboard {
+                display: none !important;
+            }
+            
+            .print-document {
+                display: block !important;
+                position: static !important;
+                background: white !important;
+                padding: 0 !important;
+                height: auto !important;
+            }
+            
+            .print-document-content {
+                padding: 40px !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                min-height: 0 !important;
+            }
+            
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <h1>Teacher I Applicants Evaluation System</h1>
+                <div class="subtitle">Individual Evaluation Sheet (IES)</div>
+            </div>
+            <div>
+                Real-time Score Calculation
+            </div>
+        </div>
+
+        <!-- Left Sidebar: Applicant Information -->
+        <div class="sidebar-left">
+            <div class="info-section">
+                <div class="info-section-title">Applicant Information</div>
+                
+                <div class="input-wrapper">
+                    <label>Full Name *</label>
+                    <input type="text" id="applicantName" placeholder="Enter full name">
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Application Code</label>
+                    <input type="text" id="applicationCode" placeholder="Enter code">
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Position Applied For *</label>
+                    <input type="text" id="positionApplied" placeholder="Enter position" value="TEACHER I" disabled>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Schools Division Office</label>
+                    <input type="text" id="schoolDivision" placeholder="Enter division">
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Contact Number</label>
+                    <input type="text" id="contactNumber" placeholder="Enter contact">
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Job Group/SG-Level</label>
+                    <input type="text" id="jobGroup" placeholder="Enter job group">
+                </div>
+            </div>
+
+            <div class="buttons-full">
+                <button class="btn-primary" onclick="calculateScores()">Calculate Scores</button>
+                <button class="btn-success" onclick="generatePrint()">Generate Print</button>
+                <button class="btn-secondary" onclick="resetForm()">Reset Form</button>
+            </div>
+        </div>
+
+        <!-- Main Content: Criteria Cards -->
+        <div class="main-content">
+            <!-- Education Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">EDUCATION</div>
+                    <div class="card-points">10 PTS</div>
+                </div>
+                <div class="input-wrapper">
+                    <label>Education Level</label>
+                    <select id="educationLevel">
+                        <option value="1">Can read and write</option>
+                        <option value="2">Elementary Graduate</option>
+                        <option value="3">Completed Junior High School (K to 12) / High School Level (Old Curriculum)</option>
+                        <option value="4">Senior High School Graduate (K to 12) / High School Graduate (Old Curriculum) / <2 years College</option>
+                        <option value="5">Completed 2 years in College / >2 years College, < Bachelor's Degree</option>
+                        <option value="6" selected>Bachelor's degree (QS)</option>
+                        <option value="7">6 Units earned towards the completion of a Master's Degree</option>
+                        <option value="8">9 Units earned towards the completion of a Master's Degree</option>
+                        <option value="9">12 Units earned towards the completion of a Master's Degree</option>
+                        <option value="10">15 Units earned towards the completion of a Master's Degree</option>
+                        <option value="11">18 Units earned towards the completion of a Master's Degree</option>
+                        <option value="12">21 Units earned towards the completion of a Master's Degree</option>
+                        <option value="13">24 Units earned towards the completion of a Master's Degree</option>
+                        <option value="14">27 Units earned towards the completion of a Master's Degree</option>
+                        <option value="15">30 Units earned towards the completion of a Master's Degree</option>
+                        <option value="16">33 Units earned towards the completion of a Master's Degree</option>
+                        <option value="17">36 Units earned towards the completion of a Master's Degree</option>
+                        <option value="18">39 Units earned towards the completion of a Master's Degree</option>
+                        <option value="19">42 Units earned towards the completion of a Master's Degree</option>
+                        <option value="20">Complete Academic Requirements (CAR) towards a Master's Degree</option>
+                        <option value="21">Master's Degree</option>
+                        <option value="22">3 Units earned towards the completion of a Doctorate</option>
+                        <option value="23">6 Units earned towards the completion of a Doctorate</option>
+                        <option value="24">9 Units earned towards the completion of a Doctorate</option>
+                        <option value="25">12 Units earned towards the completion of a Doctorate</option>
+                        <option value="26">15 Units earned towards the completion of a Doctorate</option>
+                        <option value="27">18 Units earned towards the completion of a Doctorate</option>
+                        <option value="28">21 Units earned towards the completion of a Doctorate</option>
+                        <option value="29">24 Units earned towards the completion of a Doctorate</option>
+                        <option value="30">Complete Academic Requirements (CAR) towards a Doctorate</option>
+                        <option value="31">Doctorate</option>
+                    </select>
+                </div>
+                <div class="score-display">
+                    <div class="score-label">Current Score</div>
+                    <div class="score-value" id="educationScore">0.000</div>
+                </div>
+            </div>
+
+            <!-- Training Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">TRAINING</div>
+                    <div class="card-points">10 PTS</div>
+                </div>
+                <div class="input-wrapper">
+                    <label>Total Training Hours</label>
+                    <input type="number" id="trainingHours" min="0" max="1000" value="0">
+                </div>
+                <div class="score-display">
+                    <div class="score-label">Current Score</div>
+                    <div class="score-value" id="trainingScore">0.000</div>
+                </div>
+            </div>
+
+            <!-- Experience Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">EXPERIENCE</div>
+                    <div class="card-points">10 PTS</div>
+                </div>
+                <div class="input-wrapper">
+                    <label>Years of Experience</label>
+                    <select id="experienceYears">
+                        <option value="1">None to < 6 months</option>
+                        <option value="2">6 months to < 1 year</option>
+                        <option value="3">1 year to < 1 year 6 months</option>
+                        <option value="4">1 year 6 months to < 2 years</option>
+                        <option value="5">2 years to < 2 years 6 months</option>
+                        <option value="6">2 years 6 months to < 3 years</option>
+                        <option value="7">3 years to < 3 years 6 months</option>
+                        <option value="8">3 years 6 months to < 4 years</option>
+                        <option value="9">4 years to < 4 years 6 months</option>
+                        <option value="10">4 years 6 months to < 5 years</option>
+                        <option value="11">5 years to < 5 years 6 months</option>
+                        <option value="12">5 years 6 months to < 6 years</option>
+                        <option value="13">6 years to < 6 years 6 months</option>
+                        <option value="14">6 years 6 months to < 7 years</option>
+                        <option value="15">7 years to < 7 years 6 months</option>
+                        <option value="16">7 years 6 months to < 8 years</option>
+                        <option value="17">8 years to < 8 years 6 months</option>
+                        <option value="18">8 years 6 months to < 9 years</option>
+                        <option value="19">9 years to < 9 years 6 months</option>
+                        <option value="20">9 years 6 months to < 10 years</option>
+                        <option value="21">10 years to < 10 years 6 months</option>
+                        <option value="22">10 years 6 months to < 11 years</option>
+                        <option value="23">11 years to < 11 years 6 months</option>
+                        <option value="24">11 years 6 months to < 12 years</option>
+                        <option value="25">12 years to < 12 years 6 months</option>
+                        <option value="26">12 years 6 months to < 13 years</option>
+                        <option value="27">13 years to < 13 years 6 months</option>
+                        <option value="28">13 years 6 months to < 14 years</option>
+                        <option value="29">14 years to < 14 years 6 months</option>
+                        <option value="30">14 years 6 months to < 15 years</option>
+                        <option value="31">15 years or more</option>
+                    </select>
+                </div>
+                <div class="score-display">
+                    <div class="score-label">Current Score</div>
+                    <div class="score-value" id="experienceScore">0.000</div>
+                </div>
+            </div>
+
+            <!-- LET Rating Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">LET RATING</div>
+                    <div class="card-points">10 PTS</div>
+                </div>
+                <div class="input-wrapper">
+                    <label>LET Rating (Above 1)</label>
+                    <input type="number" id="letRating" min="0" max="100" step="0.01" value="0">
+                </div>
+                <div class="score-display">
+                    <div class="score-label">Current Score</div>
+                    <div class="score-value" id="letScore">0.000</div>
+                </div>
+            </div>
+
+            <!-- PPST COI Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">PPST COI</div>
+                    <div class="card-points">35 PTS</div>
+                </div>
+                <div class="input-wrapper">
+                    <label>Demo Teaching (C12, Max 30)</label>
+                    <input type="number" id="demoTeachingRating" min="0" max="30" step="0.01" value="0">
+                </div>
+                <div class="score-display">
+                    <div class="score-label">Current Score</div>
+                    <div class="score-value" id="ppstCoiScore">0.000</div>
+                </div>
+            </div>
+
+            <!-- PPST NCOI Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">PPST NCOI</div>
+                    <div class="card-points">25 PTS</div>
+                </div>
+                <div class="input-wrapper">
+                    <label>TRF Rating</label>
+                    <input type="number" id="trfRating" min="0" max="200" step="0.01" value="0">
+                </div>
+                <div class="score-display">
+                    <div class="score-label">Current Score</div>
+                    <div class="score-value" id="ppstNcoiScore">0.000</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar: Total Score -->
+        <div class="sidebar-right">
+            <div class="total-display">
+                <div class="total-label">Total Score</div>
+                <div class="total-value" id="totalScore">0.000</div>
+                <div class="total-max">out of 100 points</div>
+            </div>
+
+            <div class="score-breakdown">
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Education</span>
+                    <span class="breakdown-value" id="breakdownEducation">0.000</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Training</span>
+                    <span class="breakdown-value" id="breakdownTraining">0.000</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Experience</span>
+                    <span class="breakdown-value" id="breakdownExperience">0.000</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">LET Rating</span>
+                    <span class="breakdown-value" id="breakdownLET">0.000</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">PPST COI</span>
+                    <span class="breakdown-value" id="breakdownCOI">0.000</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">PPST NCOI</span>
+                    <span class="breakdown-value" id="breakdownNCOI">0.000</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Buttons Section (only visible on mobile) -->
+    <div class="mobile-buttons">
+        <button class="btn-primary" onclick="calculateScores()">Calculate Scores</button>
+        <button class="btn-success" onclick="generatePrint()">Generate Print</button>
+        <button class="btn-secondary" onclick="downloadDocument()">📄 Download Document</button>
+        <button class="btn-secondary" onclick="resetForm()">Reset Form</button>
+    </div>
+
+    <!-- Print Document Section (outside dashboard) -->
+    <div class="print-document">
+        <!-- Action Buttons for Preview -->
+        <div style="position: fixed; top: 20px; right: 20px; z-index: 10001; display: flex; gap: 10px;" class="no-print">
+            <button onclick="backToDashboard()" style="padding: 12px 24px; background: #95a5a6; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                ← Back to Dashboard
+            </button>
+            <button onclick="printDocument()" style="padding: 12px 24px; background: #00c9a7; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                🖨️ Print Document
+            </button>
+        </div>
+        
+        <div class="print-document-content">
+            <!-- Header with Logo -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="flex: 1;"></div>
+                    <div style="flex: 2; text-align: center;">
+                        <img src="assets/icons/Deped.jpg" alt="DepEd Logo" style="width: 80px; height: 80px; margin-bottom: 10px;">
+                        <p style="margin: 2px 0; font-size: 11px;"><strong>Republic of the Philippines</strong></p>
+                        <p style="margin: 2px 0; font-size: 14px; font-family: 'Old English Text MT', serif;"><strong>Department of Education</strong></p>
+                        <p style="margin: 2px 0; font-size: 10px;">Region IV-A</p>
+                        <p style="margin: 2px 0; font-size: 11px; text-decoration: underline;"><strong>SCHOOLS DIVISION OF QUEZON PROVINCE</strong></p>
+                    </div>
+                    <div style="flex: 1; text-align: right;">
+                        <p style="font-size: 11px; font-style: italic;">Annex G-1</p>
+                    </div>
+                </div>
+                <div style="border-top: 3px double #000; margin: 15px 0;"></div>
+                <p style="margin: 10px 0; font-size: 12px; text-decoration: underline;"><strong>INDIVIDUAL EVALUATION SHEET</strong></p>
+            </div>
+
+            <!-- Applicant Info Section -->
+            <div style="margin-bottom: 20px; font-size: 11px;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="width: 70%;"><strong>Name of Applicant:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; min-width: 300px;" id="printApplicantName"></span></td>
+                        <td style="width: 30%;"><strong>Application Code:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; min-width: 100px;" id="printApplicationCode"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Position Applied For:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; min-width: 300px;" id="printPositionApplied"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Office:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; min-width: 300px;" id="printSDO"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contact Number:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; min-width: 300px;" id="printContactNum"></span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Job Group/SG-Level:</strong> <span style="border-bottom: 1px solid #000; display: inline-block; min-width: 300px;" id="printJobGroupLevel"></span></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Main Evaluation Table -->
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 10px;">
+                <thead>
+                    <tr>
+                        <th rowspan="2" style="border: 1px solid #000; padding: 8px; background-color: #d3d3d3; text-align: center; width: 20%;"><strong>Criteria</strong></th>
+                        <th colspan="4" style="border: 1px solid #000; padding: 8px; background-color: #d3d3d3; text-align: center;"><strong>Applicant's Actual Qualifications</strong></th>
+                    </tr>
+                    <tr>
+                        <th style="border: 1px solid #000; padding: 8px; background-color: #d3d3d3; text-align: center; width: 15%;"><strong>Weight Allocation</strong></th>
+                        <th style="border: 1px solid #000; padding: 8px; background-color: #d3d3d3; text-align: center; width: 35%;"><strong>Details of Applicant's Qualifications</strong><br><span style="font-weight: normal; font-size: 9px; font-style: italic;">(Relevant documents/ credentials/TOR submitted, additional requirements, tender of IPCRF/IPCRR)</span></th>
+                        <th style="border: 1px solid #000; padding: 8px; background-color: #d3d3d3; text-align: center; width: 20%;"><strong>Computation</strong></th>
+                        <th style="border: 1px solid #000; padding: 8px; background-color: #d3d3d3; text-align: center; width: 10%;"><strong>Actual Score</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5px;">Education</td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;">10</td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printEducationDetails"></td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printEducationComp"></td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;" id="printEducationScore"></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5px;">Training</td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;">10</td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printTrainingDetails"></td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printTrainingComp"></td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;" id="printTrainingScore"></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5px;">Experience</td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;">10</td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printExperienceDetails"></td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printExperienceComp"></td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;" id="printExperienceScore"></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5px;">PBET/ LET/ LEPT Rating</td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;">10</td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printLETDetails"></td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printLETComp"></td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;" id="printLETScore"></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5px;">PPST Classroom Observable Indicators<br><span style="font-style: italic; font-size: 9px;">(Demonstration Teaching using COT-BSP)</span></td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;">35</td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printPPSTCOIDetails"></td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printPPSTCOIComp"></td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;" id="printPPSTCOIScore"></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5px;">PPST Non-Classroom Observable Indicators<br><span style="font-style: italic; font-size: 9px;">(Teacher Reflection)</span></td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;">25</td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printPPSTNCOIDetails"></td>
+                        <td style="border: 1px solid #000; padding: 5px;" id="printPPSTNCOIComp"></td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;" id="printPPSTNCOIScore"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="border: 1px solid #000; padding: 5px; text-align: right;"><strong>TOTAL</strong></td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: center;"><strong id="printTotalScore"></strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Attestation Text -->
+            <div style="margin: 20px 0; font-size: 10px; text-align: justify;">
+                <p style="margin-bottom: 15px;">
+                    I hereby attest to the conduct of the application and assessment process in accordance with the applicable guidelines; and acknowledge, upon discussion with the Human Resource Merit Promotion and Selection Board (HRMPSB), the results of the comparative assessment and the points given to me based on my qualifications and submitted documentary requirements for the <strong id="printPositionText">Teacher</strong> under <strong id="printDivisionText">DepEd Division of Quezon</strong>.
+                </p>
+                <p style="margin-bottom: 30px;">
+                    Furthermore, I hereby affix my signature in this Form to attest to the objective and judicious conduct of the HRMPSB evaluation through Open Ranking System.
+                </p>
+            </div>
+
+            <!-- Signature Section -->
+            <div style="margin-top: 40px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 10px;">
+                    <tr>
+                        <td style="width: 50%; text-align: center; vertical-align: top;">
+                            <div style="border-bottom: 1px solid #000; width: 80%; margin: 0 auto 5px auto; height: 40px;"></div>
+                            <p><strong>Name and Signature of Applicant</strong></p>
+                            <p style="margin-top: 10px;">Date: <span id="printSignatureDate">_______________</span></p>
+                        </td>
+                        <td style="width: 50%; vertical-align: top;">
+                            <p style="margin-bottom: 10px;">Attested:</p>
+                            <div style="border-bottom: 1px solid #000; width: 80%; margin: 40px auto 5px auto;"></div>
+                            <p style="text-align: center;"><strong>HRMPSB Chair</strong></p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

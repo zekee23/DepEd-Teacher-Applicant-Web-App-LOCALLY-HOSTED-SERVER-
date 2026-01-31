@@ -1,0 +1,696 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1a1a2e;
+    height: 100vh;
+    overflow: hidden;
+    color: #333;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 350px 1fr 300px;
+    grid-template-rows: 60px 1fr;
+    height: 100vh;
+    gap: 0;
+}
+
+/* Header */
+.header {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.header h1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.header .subtitle {
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+/* Left Sidebar - Applicant Info */
+.sidebar-left {
+    background: #f5f6fa;
+    padding: 20px;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+}
+
+/* Main Content - Criteria Cards */
+.main-content {
+    background: #eef1f6;
+    padding: 20px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 15px;
+    align-content: start;
+}
+
+/* Right Sidebar - Total Score */
+.sidebar-right {
+    background: linear-gradient(180deg, #0f3460 0%, #16213e 100%);
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Card Styles */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f3460;
+}
+
+.card-points {
+    font-size: 11px;
+    background: #e8f4f8;
+    color: #0f3460;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.input-wrapper {
+    margin-bottom: 10px;
+}
+
+.input-wrapper label {
+    display: block;
+    font-size: 10px;
+    color: #666;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-wrapper input,
+.input-wrapper select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 13px;
+    transition: all 0.3s;
+    background: #fafbfc;
+}
+
+.input-wrapper input:focus,
+.input-wrapper select:focus {
+    outline: none;
+    border-color: #0f3460;
+    background: white;
+}
+
+/* Score Display */
+.score-display {
+    margin-top: 12px;
+    padding: 12px;
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.score-label {
+    font-size: 9px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.score-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #00d4ff;
+}
+
+/* Info Section */
+.info-section {
+    margin-bottom: 20px;
+}
+
+.info-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0f3460;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #0f3460;
+}
+
+/* Total Score Display */
+.total-display {
+    text-align: center;
+    width: 100%;
+}
+
+.total-label {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.total-value {
+    font-size: 72px;
+    font-weight: 700;
+    color: #00d4ff;
+    line-height: 1;
+    margin-bottom: 10px;
+    text-shadow: 0 0 30px rgba(0,212,255,0.5);
+}
+
+.total-max {
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.score-breakdown {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.breakdown-label {
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+.breakdown-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #00d4ff;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15,52,96,0.4);
+}
+
+.btn-success {
+    background: #00c9a7;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #00b894;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: #95a5a6;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #7f8c8d;
+}
+
+.buttons-full {
+    margin-top: 20px;
+}
+
+.buttons-full button {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+/* Hide mobile buttons on desktop */
+.mobile-buttons {
+    display: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0f3460;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #16213e;
+}
+
+/* Responsive Design */
+
+/* Large tablets and smaller laptops (1200px and below) */
+@media (max-width: 1200px) {
+    .dashboard {
+        grid-template-columns: 300px 1fr 250px;
+    }
+
+    .main-content {
+        gap: 12px;
+    }
+
+    .card {
+        padding: 14px;
+    }
+
+    .total-value {
+        font-size: 60px;
+    }
+}
+
+/* Tablets (992px and below) */
+@media (max-width: 992px) {
+    .dashboard {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 60px auto auto;
+    }
+
+    .header {
+        grid-column: 1 / -1;
+    }
+
+    .sidebar-left {
+        grid-column: 1;
+        grid-row: 2;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        max-height: 50vh;
+    }
+
+    .main-content {
+        grid-column: 2;
+        grid-row: 2 / 4;
+        gap: 10px;
+    }
+
+    .sidebar-right {
+        grid-column: 1;
+        grid-row: 3;
+        max-height: 50vh;
+    }
+
+    .total-value {
+        font-size: 48px;
+    }
+}
+
+/* Mobile landscape and small tablets (768px and below) */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+    }
+
+    .dashboard {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .header {
+        padding: 15px 20px;
+        order: 1;
+    }
+
+    .header h1 {
+        font-size: 16px;
+    }
+
+    .header .subtitle {
+        font-size: 10px;
+    }
+
+    .sidebar-left,
+    .main-content,
+    .sidebar-right {
+        max-height: none;
+        overflow-y: visible;
+        border: none;
+    }
+
+    .sidebar-left {
+        order: 2;
+    }
+
+    /* Hide buttons from sidebar on mobile */
+    .sidebar-left .buttons-full {
+        display: none;
+    }
+
+    .main-content {
+        order: 3;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        padding: 15px;
+    }
+
+    .sidebar-right {
+        order: 4;
+        padding: 30px 20px;
+    }
+
+    /* Create mobile button section at the end */
+    .mobile-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 15px;
+        background: #f5f6fa;
+        border-top: 2px solid #ddd;
+        order: 5;
+    }
+
+    .mobile-buttons button {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .total-value {
+        font-size: 56px;
+    }
+
+    .score-breakdown {
+        margin-top: 20px;
+    }
+}
+
+/* Mobile portrait (576px and below) */
+@media (max-width: 576px) {
+    .header h1 {
+        font-size: 14px;
+    }
+
+    .header div:last-child {
+        display: none;
+    }
+
+    .sidebar-left,
+    .main-content,
+    .sidebar-right {
+        padding: 15px;
+    }
+
+    .info-section-title {
+        font-size: 10px;
+    }
+
+    .input-wrapper label {
+        font-size: 9px;
+    }
+
+    .input-wrapper input,
+    .input-wrapper select {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .card-title {
+        font-size: 12px;
+    }
+
+    .card-points {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+
+    .score-value {
+        font-size: 20px;
+    }
+
+    .total-value {
+        font-size: 48px;
+    }
+
+    .total-label {
+        font-size: 11px;
+    }
+
+    .total-max {
+        font-size: 12px;
+    }
+
+    .breakdown-label {
+        font-size: 10px;
+    }
+
+    .breakdown-value {
+        font-size: 12px;
+    }
+
+    button {
+        padding: 12px 8px;
+        font-size: 10px;
+    }
+
+    .buttons-full button {
+        margin-bottom: 6px;
+    }
+}
+
+/* Very small mobile (400px and below) */
+@media (max-width: 400px) {
+    .header {
+        padding: 12px 15px;
+    }
+
+    .header h1 {
+        font-size: 13px;
+    }
+
+    .sidebar-left,
+    .main-content,
+    .sidebar-right {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    .total-value {
+        font-size: 40px;
+    }
+
+    .score-display {
+        padding: 10px;
+    }
+}
+
+/* Print Styles */
+.print-document {
+    display: none;
+}
+
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .dashboard {
+        display: none;
+    }
+
+    .print-document {
+        display: block;
+        padding: 40px;
+        font-family: 'Times New Roman', serif;
+    }
+
+    .print-header {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #000;
+        padding-bottom: 20px;
+    }
+
+    .print-header h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .print-info {
+        margin-bottom: 30px;
+    }
+
+    .print-info p {
+        margin-bottom: 8px;
+        font-size: 12px;
+    }
+
+    .print-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+    }
+
+    .print-table th,
+    .print-table td {
+        border: 1px solid #000;
+        padding: 10px;
+        text-align: left;
+        font-size: 11px;
+    }
+
+    .print-table th {
+        background: #000;
+        color: white;
+        font-weight: bold;
+    }
+
+    .print-footer {
+        margin-top: 50px;
+        page-break-inside: avoid;
+    }
+
+    .signature-section {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .signature-box {
+        width: 45%;
+    }
+
+    .signature-line {
+        border-top: 1px solid #000;
+        margin-top: 50px;
+        padding-top: 5px;
+        text-align: center;
+        font-size: 11px;
+    }
+}
+
+/* Official DepEd Header Styles for Print */
+.print-header-official {
+    margin-bottom: 20px;
+}
+
+.deped-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.deped-logo {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+}
+
+.deped-text {
+    flex: 1;
+}
+
+.deped-line1 {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.deped-line2 {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.deped-line3 {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.deped-line4 {
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+}
