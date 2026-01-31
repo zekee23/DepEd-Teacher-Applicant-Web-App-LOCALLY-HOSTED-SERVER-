@@ -196,20 +196,16 @@ DIRECTORY = './'   # Server root directory
 *Professional government-compliant document formatting*
 
 ### Mobile View
-![Screenshot 1](./server/assets/screenshots/5.jpg)
-*Mobile dashboard interface*
 
-![Screenshot 2](./server/assets/screenshots/4.jpg)
-*Score calculation on mobile*
+| Screenshot 1 | Screenshot 2 | Screenshot 3 |
+|--------------|--------------|--------------|
+| ![Screenshot 1](./server/assets/screenshots/5.jpg) | ![Screenshot 2](./server/assets/screenshots/4.jpg) | ![Screenshot 3](./server/assets/screenshots/3.jpg) |
+| *Mobile dashboard* | *Score calculation* | *Applicant entry* |
 
-![Screenshot 3](./server/assets/screenshots/3.jpg)
-*Applicant information entry*
-
-![Screenshot 4](./server/assets/screenshots/2.jpg)
-*Evaluation criteria on mobile*
-
-![Screenshot 5](./server/assets/screenshots/1.jpg)
-*Print-ready document generation*
+| Screenshot 4 | Screenshot 5 |
+|--------------|--------------|
+| ![Screenshot 4](./server/assets/screenshots/2.jpg) | ![Screenshot 5](./server/assets/screenshots/1.jpg) |
+| *Evaluation criteria* | *Document generation* |
 
 ## 🏗️ Technical Architecture
 
