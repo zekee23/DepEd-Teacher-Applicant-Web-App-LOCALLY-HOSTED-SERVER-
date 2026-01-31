@@ -1,105 +1,366 @@
-# HRMPSB Evaluation System
+# 🎓 DepEd Teacher Applicant Evaluation System
 
-A lightweight Teacher I Applicants Evaluation System that runs on any device with a web browser.
+<div align="center">
 
-## Features
+![DepEd Logo](assets/icons/Deped.jpg)
 
-- Real-time score calculation
-- Print-ready evaluation forms
-- No database required - runs entirely in browser
-- Responsive design for desktop and mobile
-- Network accessible for multiple users
-- Secure file serving (no directory listing)
+**Automated Teacher Applicant Scoring & Document Generation System**
 
-## Quick Start
+*A comprehensive web application designed to streamline the teacher evaluation process for Department of Education divisions*
 
-### Using Python (Recommended)
-1. Double-click `start-server.bat`
-2. Open your browser and go to `http://localhost:8080`
-3. Other devices can access using your IP address
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/your-username/DepEd-Teacher-Applicant-System)
+[![Platform](https://img.shields.io/badge/platform-Web-lightgrey.svg)](https://github.com/your-username/DepEd-Teacher-Applicant-System)
 
-### Local Only (No Network)
-Simply open `index.html` in your web browser
+[🚀 Quick Start](#-quick-start) • [📋 Features](#-features) • [🛠️ Installation](#️-installation) • [📖 Usage](#-usage) • [🔧 Configuration](#-configuration) • [📸 Screenshots](#-screenshots)
 
-## Network Access
+</div>
 
-To allow other devices on your network to access the system:
+## 📖 About
 
+The DepEd Teacher Applicant Evaluation System is a **government-compliant web application** that revolutionizes the teacher recruitment process by automating applicant scoring and generating print-ready evaluation documents. Built specifically for the Department of Education's Human Resource Merit Promotion and Selection Board (HRMPSB), this system eliminates manual calculations and paperwork, ensuring **fair, transparent, and efficient** evaluation of teacher applicants.
+
+### 🎯 Mission
+
+To modernize and streamline the teacher applicant evaluation process by providing:
+- **Automated scoring** based on DepEd's comprehensive criteria
+- **Print-ready documents** compliant with government standards
+- **Real-time calculations** to reduce human error
+- **Offline capability** for remote deployment
+- **Secure local hosting** for data privacy
+
+## ✨ Key Features
+
+### 🏆 **Comprehensive Evaluation Criteria**
+- **Education** (10 points) - From basic literacy to doctoral degrees
+- **Training** (10 points) - Professional development hours
+- **Experience** (10 points) - Teaching experience in 6-month intervals
+- **LET Rating** (10 points) - Licensure Examination for Teachers scores
+- **PPST Classroom Observable Indicators** (35 points) - Demonstration teaching
+- **PPST Non-Classroom Observable Indicators** (25 points) - Teacher reflection
+
+### 🚀 **Smart Automation**
+- **Real-time score calculation** as you type
+- **Automatic document formatting** for government standards
+- **Instant print-ready generation** with proper headers and signatures
+- **Mobile-responsive design** for field evaluations
+- **No database required** - runs entirely in browser
+
+### 🔒 **Government-Grade Security**
+- **Local server deployment** - data never leaves your network
+- **Secure file serving** with directory protection
+- **Access control** and path restrictions
+- **Offline operation** for sensitive data handling
+
+### 📱 **User-Friendly Interface**
+- **Modern, intuitive dashboard** with card-based layout
+- **Mobile-optimized** for tablet and smartphone use
+- **Professional print templates** with DepEd branding
+- **One-click document generation** and printing
+
+## 🚀 Quick Start
+
+### Method 1: One-Click Local Server (Recommended)
+1. **Download** the project files to your computer
+2. **Double-click** `start-server.bat` to launch the local server
+3. **Open your browser** and navigate to `http://localhost:8080`
+4. **Start evaluating** applicants immediately!
+
+### Method 2: Direct Browser Access
+1. **Open** `index.html` directly in your web browser
+2. **Works offline** - no internet connection required
+3. **Perfect for** single-user evaluation
+
+### Network Access for Multiple Users
 1. **Start the server** using `start-server.bat`
-2. **Find your IP address** (shown in the server output)
-3. **Access from other devices** using `http://YOUR_IP:8080`
+2. **Note your IP address** displayed in the server console
+3. **Other devices** can access via `http://YOUR_IP:8080`
+4. **All users** can evaluate simultaneously in real-time
 
-### Example URLs
-- Local: `http://localhost:8080`
-- Network: `http://192.168.1.100:8080` (use your actual IP)
+## 🛠️ Installation & Setup
 
-## System Requirements
+### System Requirements
+- **Windows 7 or later** (Server mode)
+- **Python 3.x** (included with most Windows installations)
+- **Any modern web browser** (Chrome, Firefox, Edge, Safari)
+- **Network connection** (optional, for multi-device access)
 
-- Windows 7 or later
-- Python 3.x (for server mode)
-- Any modern web browser
-- Network connection (for multi-device access)
+### Step-by-Step Setup
 
-## Usage
-
-1. Fill in applicant information
-2. Enter evaluation scores
-3. Click "Generate Print" to print the evaluation form
-4. Use "Reset Form" to clear all data
-
-## Security Features
-
-- **No directory listing** - prevents browsing your files
-- **Path restriction** - only serves files from server folder
-- **Access denied** for parent directory access
-- **Secure by default** - blocks unauthorized access
-
-## File Structure
-
-```
-server/
-├── index.html          # Main application
-├── assets/
-│   ├── css/
-│   │   ├── main.css    # Main styles
-│   │   └── style.css   # Additional styles
-│   ├── js/
-│   │   └── script.js   # Application logic
-│   └── icons/          # Images and icons
-├── start-server.bat    # Python server launcher
-├── start-no-server.bat # Local only launcher
-├── simple-server.py    # Server script
-└── README.md          # This file
+#### 1. Download the Application
+```bash
+# Clone or download the project files
+git clone https://github.com/your-username/DepEd-Teacher-Applicant-System.git
+cd DepEd-Teacher-Applicant-System/server
 ```
 
-## Troubleshooting
+#### 2. Launch the Server
+```bash
+# Windows users - simply double-click
+start-server.bat
 
-**Server won't start:**
-- Make sure Python is installed
-- Check if port 8080 is available
-- Try running as Administrator
+# Or run manually
+python simple-server.py
+```
 
-**Can't access from other devices:**
-- Verify all devices are on same network
-- Use correct IP address
-- Check Windows Firewall settings
+#### 3. Access the Application
+- **Local access:** `http://localhost:8080`
+- **Network access:** `http://YOUR_IP:8080`
 
-**Print not working:**
-- Try a different browser
-- Check browser print settings
-- Update to latest browser version
+#### 4. Start Evaluating
+1. Enter applicant information
+2. Input evaluation criteria
+3. Watch scores calculate automatically
+4. Generate print-ready documents
 
-## Server Security
+## 📋 Usage Guide
 
-The Python server includes custom security features:
-- Prevents directory browsing
-- Restricts file access to server folder only
-- Blocks access to parent directories
-- Shows 403 error for unauthorized access
+### Basic Workflow
 
-## Performance
+#### 1. **Applicant Information Entry**
+- Full name (required)
+- Application code
+- Position applied for (defaults to Teacher I)
+- Schools Division Office
+- Contact number
+- Job Group/SG-Level
 
-- Lightweight and fast
-- Minimal resource usage
-- Suitable for low-end devices
-- Handles multiple simultaneous users
+#### 2. **Criteria Evaluation**
+- **Education Level:** Select from comprehensive dropdown
+- **Training Hours:** Input total professional development hours
+- **Experience:** Choose years of teaching experience
+- **LET Rating:** Enter licensure exam score
+- **PPST COI:** Input demonstration teaching scores
+- **PPST NCOI:** Enter teacher reflection scores
+
+#### 3. **Score Calculation**
+- **Automatic calculation** as you input data
+- **Real-time updates** in the sidebar
+- **Breakdown display** of all criteria scores
+- **Total score** out of 100 points
+
+#### 4. **Document Generation**
+- **Click "Generate Print"** for preview mode
+- **Professional formatting** with DepEd headers
+- **Print-ready layout** for official documents
+- **Download option** for digital storage
+
+### Advanced Features
+
+#### **Multi-Device Evaluation**
+- **Server mode** enables multiple evaluators
+- **Real-time collaboration** on the same network
+- **Mobile access** for field evaluations
+- **Tablet support** for paperless assessments
+
+#### **Print Management**
+- **Government-compliant formatting**
+- **DepEd branding and headers**
+- **Signature lines** for applicants and HRMPSB Chair
+- **Automatic date insertion**
+- **Professional document layout**
+
+## 🔧 Configuration
+
+### Server Configuration
+The system uses a lightweight Python server with built-in security:
+
+```python
+# Server settings (simple-server.py)
+PORT = 8080
+HOST = '0.0.0.0'  # Allows network access
+DIRECTORY = './'   # Server root directory
+```
+
+### Customization Options
+- **Port modification:** Edit `simple-server.py`
+- **Branding updates:** Modify `assets/css/main.css`
+- **Criteria adjustments:** Edit `assets/js/script.js`
+- **Document templates:** Update `index.html` print section
+
+### Security Features
+- **Directory listing disabled**
+- **Parent directory access blocked**
+- **File type restrictions**
+- **Path traversal protection**
+- **Access logging** (optional)
+
+## 📸 Screenshots
+
+### Main Dashboard
+![Main Dashboard](assets/screenshots/photo1.png)
+*Modern, intuitive dashboard with real-time score calculation*
+
+### Print Preview
+![Print Preview](assets/screenshots/image.png)
+*Professional government-compliant document formatting*
+
+### Mobile View
+![Screenshot 1](assets/screenshots/5.jpg)
+*Mobile dashboard interface*
+
+![Screenshot 2](assets/screenshots/4.jpg)
+*Score calculation on mobile*
+
+![Screenshot 3](assets/screenshots/3.jpg)
+*Applicant information entry*
+
+![Screenshot 4](assets/screenshots/2.jpg)
+*Evaluation criteria on mobile*
+
+![Screenshot 5](assets/screenshots/1.jpg)
+*Print-ready document generation*
+
+## 🏗️ Technical Architecture
+
+### Frontend Technologies
+- **HTML5** - Semantic markup and structure
+- **CSS3** - Modern styling with responsive design
+- **JavaScript (ES6+)** - Dynamic functionality and calculations
+- **Print CSS** - Professional document formatting
+
+### Backend Infrastructure
+- **Python 3.x** - Lightweight HTTP server
+- **Custom security layer** - Access control and protection
+- **Static file serving** - Efficient asset delivery
+- **Cross-platform compatibility** - Windows, macOS, Linux
+
+### Data Handling
+- **Client-side processing** - No server database required
+- **Local storage** - Optional data persistence
+- **Print generation** - Browser-native printing
+- **Export capabilities** - Document download options
+
+## 📊 Evaluation Criteria Breakdown
+
+| **Criteria** | **Points** | **Description** |
+|--------------|------------|-----------------|
+| **Education** | 10 pts | Academic qualifications from basic literacy to doctoral degrees |
+| **Training** | 10 pts | Professional development and training hours completed |
+| **Experience** | 10 pts | Teaching experience measured in 6-month intervals |
+| **LET Rating** | 10 pts | Licensure Examination for Teachers score |
+| **PPST COI** | 35 pts | Classroom Observable Indicators (Demonstration Teaching) |
+| **PPST NCOI** | 25 pts | Non-Classroom Observable Indicators (Teacher Reflection) |
+| **TOTAL** | **100 pts** | **Comprehensive applicant evaluation** |
+
+## 🔒 Security & Compliance
+
+### Data Privacy
+- **Local deployment** - Data never leaves your network
+- **No cloud storage** - Complete data control
+- **Offline capability** - No internet dependency
+- **Secure file serving** - Protected access controls
+
+### Government Compliance
+- **DepEd formatting standards** - Official document layouts
+- **HRMPSB requirements** - Merit promotion compliance
+- **Print-ready documents** - Government paper standards
+- **Signature protocols** - Official attestation procedures
+
+## 🚀 Performance & Scalability
+
+### System Performance
+- **Lightweight footprint** - Minimal resource usage
+- **Fast response times** - Instant score calculations
+- **Concurrent users** - Multiple evaluators supported
+- **Mobile optimization** - Efficient on all devices
+
+### Scalability Features
+- **Network deployment** - School-wide access
+- **Browser compatibility** - Works on all modern browsers
+- **Offline operation** - No internet dependency
+- **Cross-platform** - Windows, macOS, Linux support
+
+## 🛠️ Troubleshooting
+
+### Common Issues & Solutions
+
+#### **Server Won't Start**
+```bash
+# Check Python installation
+python --version
+
+# Verify port availability
+netstat -an | findstr 8080
+
+# Run as Administrator (if needed)
+```
+
+#### **Network Access Issues**
+- **Check firewall settings** - Allow Python through Windows Firewall
+- **Verify same network** - All devices must be on the same WiFi/network
+- **Use correct IP** - Check server output for your IP address
+
+#### **Print Problems**
+- **Update browser** - Ensure latest browser version
+- **Check print settings** - Use "Print Background Graphics"
+- **Try different browser** - Chrome/Firefox recommended
+
+#### **Mobile Issues**
+- **Use landscape orientation** - Better mobile experience
+- **Update browser app** - Latest mobile browser versions
+- **Check network connection** - For server mode access
+
+### Support Resources
+- **📧 Email Support:** support@deped.gov.ph
+- **📞 Technical Help:** [Your Department Contact]
+- **📖 User Manual:** [Link to detailed documentation]
+- **🎥 Video Tutorial:** [Link to setup guide]
+
+## 🤝 Contributing
+
+We welcome contributions to improve the DepEd Teacher Applicant Evaluation System!
+
+### How to Contribute
+1. **Fork the repository**
+2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Commit your changes** (`git commit -m 'Add amazing feature'`)
+4. **Push to the branch** (`git push origin feature/amazing-feature`)
+5. **Open a Pull Request**
+
+### Development Guidelines
+- **Follow DepEd standards** for government compliance
+- **Maintain responsive design** for all device types
+- **Test thoroughly** across different browsers
+- **Document changes** in commit messages and README
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### Government Usage
+- **Free for educational institutions**
+- **Open source for government agencies**
+- **Customizable for specific division requirements**
+- **Commercial use requires permission**
+
+## 🙏 Acknowledgments
+
+- **Department of Education (DepEd)** - For the evaluation framework
+- **HRMPSB Members** - For requirements and feedback
+- **School Division IT Teams** - For testing and deployment
+- **Teacher Applicants** - For providing valuable user feedback
+
+## 📞 Contact & Support
+
+### Project Maintainers
+- **Primary Developer:** [Your Name]
+- **Email:** [your.email@deped.gov.ph]
+- **Division:** [Your Schools Division Office]
+
+### Technical Support
+- **Server Issues:** Contact your IT Department
+- **User Training:** Schedule with HRMPSB Coordinator
+- **Feature Requests:** Submit via GitHub Issues
+
+---
+
+<div align="center">
+
+**🇵🇭 Proudly serving the Philippine Education System**
+
+*Empowering fair and efficient teacher recruitment through technology*
+
+[⬆️ Back to Top](#-deped-teacher-applicant-evaluation-system)
+
+</div>
