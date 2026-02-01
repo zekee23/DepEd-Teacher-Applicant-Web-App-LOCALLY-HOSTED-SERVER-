@@ -200,12 +200,12 @@ DIRECTORY = './'   # Server root directory
 | Screenshot 1 | Screenshot 2 | Screenshot 3 |
 |--------------|--------------|--------------|
 | ![Screenshot 1](./server/assets/screenshots/5.jpg) | ![Screenshot 2](./server/assets/screenshots/4.jpg) | ![Screenshot 3](./server/assets/screenshots/3.jpg) |
-| *Mobile dashboard* | *Score calculation* | *Applicant entry* |
+| *Forms Input* | *Forms Input* | *Applicant entry* |
 
 | Screenshot 4 | Screenshot 5 |
 |--------------|--------------|
 | ![Screenshot 4](./server/assets/screenshots/2.jpg) | ![Screenshot 5](./server/assets/screenshots/1.jpg) |
-| *Evaluation criteria* | *Document generation* |
+| *Evaluation criteria* | *Score Calculation |
 
 ## 🏗️ Technical Architecture
 
@@ -297,11 +297,7 @@ netstat -an | findstr 8080
 - **Update browser app** - Latest mobile browser versions
 - **Check network connection** - For server mode access
 
-### Support Resources
-- **📧 Email Support:** support@deped.gov.ph
-- **📞 Technical Help:** [Your Department Contact]
-- **📖 User Manual:** [Link to detailed documentation]
-- **🎥 Video Tutorial:** [Link to setup guide]
+
 
 ## 🤝 Contributing
 
@@ -340,9 +336,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact & Support
 
 ### Project Maintainers
-- **Primary Developer:** [Your Name]
-- **Email:** [your.email@deped.gov.ph]
-- **Division:** [Your Schools Division Office]
+- **Primary Developer:** Earl Jann Rivera
+- **Email:** earlrivera00@gmail.com
+
 
 ### Technical Support
 - **Server Issues:** Contact your IT Department
