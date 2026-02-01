@@ -107,7 +107,46 @@
 
                 <div class="input-wrapper">
                     <label>Position Applied For *</label>
-                    <input type="text" id="positionApplied" placeholder="Enter position" value="TEACHER I" disabled>
+                    <select id="positionApplied" onchange="handlePositionChange()">
+                        <option value="TEACHER I">TEACHER I</option>
+                        <option value="TEACHER II">TEACHER II</option>
+                        <option value="TEACHER III">TEACHER III</option>
+                        <option value="MASTER TEACHER I">MASTER TEACHER I</option>
+                        <option value="MASTER TEACHER II">MASTER TEACHER II</option>
+                        <option value="MASTER TEACHER III">MASTER TEACHER III</option>
+                        <option value="HEAD TEACHER">HEAD TEACHER</option>
+                        <option value="PRINCIPAL I">PRINCIPAL I</option>
+                        <option value="PRINCIPAL II">PRINCIPAL II</option>
+                        <option value="PRINCIPAL III">PRINCIPAL III</option>
+                        <option value="PRINCIPAL IV">PRINCIPAL IV</option>
+                        <option value="SCHOOL ADMINISTRATOR">SCHOOL ADMINISTRATOR</option>
+                        <option value="GUIDANCE COUNSELOR">GUIDANCE COUNSELOR</option>
+                        <option value="SCHOOL LIBRARIAN">SCHOOL LIBRARIAN</option>
+                        <option value="SCHOOL NURSE">SCHOOL NURSE</option>
+                        <option value="ACCOUNTANT I">ACCOUNTANT I</option>
+                        <option value="ACCOUNTANT II">ACCOUNTANT II</option>
+                        <option value="BOOKKEEPER I">BOOKKEEPER I</option>
+                        <option value="BOOKKEEPER II">BOOKKEEPER II</option>
+                        <option value="CLERK I">CLERK I</option>
+                        <option value="CLERK II">CLERK II</option>
+                        <option value="CLERK III">CLERK III</option>
+                        <option value="CLERK IV">CLERK IV</option>
+                        <option value="ADMINISTRATIVE AIDE I">ADMINISTRATIVE AIDE I</option>
+                        <option value="ADMINISTRATIVE AIDE II">ADMINISTRATIVE AIDE II</option>
+                        <option value="ADMINISTRATIVE AIDE III">ADMINISTRATIVE AIDE III</option>
+                        <option value="ADMINISTRATIVE AIDE IV">ADMINISTRATIVE AIDE IV</option>
+                        <option value="ADMINISTRATIVE AIDE V">ADMINISTRATIVE AIDE V</option>
+                        <option value="ADMINISTRATIVE AIDE VI">ADMINISTRATIVE AIDE VI</option>
+                        <option value="UTILITY WORKER I">UTILITY WORKER I</option>
+                        <option value="UTILITY WORKER II">UTILITY WORKER II</option>
+                        <option value="DRIVER">DRIVER</option>
+                        <option value="SECURITY GUARD">SECURITY GUARD</option>
+                        <option value="Other">Other (Please specify)</option>
+                    </select>
+                </div>
+                <div class="input-wrapper" id="otherPositionWrapper" style="display: none;">
+                    <label>Specify Position *</label>
+                    <input type="text" id="otherPosition" placeholder="Enter specific position">
                 </div>
 
                 <div class="input-wrapper">
@@ -250,11 +289,20 @@
             <!-- LET Rating Card -->
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">LET RATING</div>
+                    <div class="card-title">LET / PBET / LEPT RATING</div>
                     <div class="card-points">10 PTS</div>
                 </div>
                 <div class="input-wrapper">
-                    <label>LET Rating (Above 1)</label>
+                    <label>Exam Type</label>
+                    <select id="letExamType">
+                        <option value="LET">LET (Licensure Examination for Teachers)</option>
+                        <option value="PBET">PBET (Professional Board Examination for Teachers)</option>
+                        <option value="LEPT">LEPT (Licensure Examination for Professional Teachers)</option>
+                        <option value="Non-teaching">Non-teaching</option>
+                    </select>
+                </div>
+                <div class="input-wrapper">
+                    <label>Rating Score</label>
                     <input type="number" id="letRating" min="0" max="100" step="0.01" value="0">
                 </div>
                 <div class="score-display">

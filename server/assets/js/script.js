@@ -1,4 +1,25 @@
 // Helper functions
+function handlePositionChange() {
+    const positionSelect = document.getElementById('positionApplied');
+    const otherWrapper = document.getElementById('otherPositionWrapper');
+    
+    if (positionSelect.value === 'Other') {
+        otherWrapper.style.display = 'block';
+    } else {
+        otherWrapper.style.display = 'none';
+    }
+}
+
+function getSelectedPosition() {
+    const positionSelect = document.getElementById('positionApplied');
+    const otherPosition = document.getElementById('otherPosition');
+    
+    if (positionSelect.value === 'Other') {
+        return otherPosition.value || 'Other Position';
+    }
+    return positionSelect.value;
+}
+
 function calculateIncrement(actualLevel, standardLevel) {
     if (!actualLevel || !standardLevel) return 0;
     return Math.max(actualLevel - standardLevel, 0);
@@ -25,6 +46,7 @@ function calculateScores() {
         educationLevel: parseInt(document.getElementById('educationLevel').value) || 6,
         trainingHours: parseFloat(document.getElementById('trainingHours').value) || 0,
         experienceYears: parseInt(document.getElementById('experienceYears').value) || 0,
+        letExamType: document.getElementById('letExamType').value || 'LET',
         letRating: parseFloat(document.getElementById('letRating').value) || 0,
         demoTeachingRating: parseFloat(document.getElementById('demoTeachingRating').value) || 0,
         trfRating: parseFloat(document.getElementById('trfRating').value) || 0
@@ -83,7 +105,7 @@ function populatePrintDocument() {
     const applicantData = {
         printApplicantName: document.getElementById('applicantName').value || '_________________',
         printApplicationCode: document.getElementById('applicationCode').value || '_________________',
-        printPositionApplied: document.getElementById('positionApplied').value || '_________________',
+        printPositionApplied: getSelectedPosition() || '_________________',
         printSDO: document.getElementById('schoolDivision').value || '_________________',
         printContactNum: document.getElementById('contactNumber').value || '_________________',
         printJobGroupLevel: document.getElementById('jobGroup').value || '_________________'
@@ -171,7 +193,7 @@ function populateScoreDetails() {
         printExperienceComp: `Increment ${calculateIncrement(inputs.experienceYears, 1)}`,
         printExperienceScore: document.getElementById('experienceScore')?.textContent || '0.000',
         
-        printLETDetails: `LET Rating: ${inputs.letRating}`,
+        printLETDetails: `${inputs.letExamType} Rating: ${inputs.letRating}`,
         printLETComp: `${inputs.letRating} * 0.1`,
         printLETScore: document.getElementById('letScore')?.textContent || '0.000',
         
@@ -331,8 +353,11 @@ function resetForm() {
             }
         });
         document.getElementById('positionApplied').value = 'TEACHER I';
+        document.getElementById('otherPosition').value = '';
+        document.getElementById('otherPositionWrapper').style.display = 'none';
         document.getElementById('educationLevel').value = '6';
         document.getElementById('experienceYears').value = '1';
+        document.getElementById('letExamType').value = 'LET';
         calculateScores();
     }
 }
