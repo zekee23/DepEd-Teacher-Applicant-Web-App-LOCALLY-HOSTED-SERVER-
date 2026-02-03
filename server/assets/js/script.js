@@ -64,8 +64,8 @@ function calculateScores() {
     const experienceScore = calculateExperienceScore(experienceIncrement);
     
     const letScore = inputs.letRating === "" || inputs.letRating === 0 ? 0 : Math.max(0, Math.min(10, inputs.letRating * 0.1));
-    const ppstCoiScore = (inputs.demoTeachingRating / 30) * 35;
-    const ppstNcoiScore = Math.min((inputs.trfRating / 20) * 25, 25);
+    const ppstCoiScore = (inputs.demoTeachingRating / 35) * 35;
+    const ppstNcoiScore = Math.min((inputs.trfRating / 25) * 25, 25);
     const totalScore = educationScore + trainingScore + experienceScore + letScore + ppstCoiScore + ppstNcoiScore;
 
     // Update displays
@@ -75,7 +75,10 @@ function calculateScores() {
     
     Object.entries(scoreElements).forEach(([id, value]) => {
         const element = document.getElementById(id);
-        if (element) element.textContent = value.toFixed(3);
+        if (element) {
+            // Show 2 decimal places for all scores
+            element.textContent = value.toFixed(2);
+        }
     });
 
     // Update breakdown
@@ -90,7 +93,7 @@ function calculateScores() {
     
     Object.entries(breakdownElements).forEach(([id, value]) => {
         const element = document.getElementById(id);
-        if (element) element.textContent = value.toFixed(3);
+        if (element) element.textContent = value.toFixed(2);
     });
 }
 
@@ -198,11 +201,11 @@ function populateScoreDetails() {
         printLETScore: document.getElementById('letScore')?.textContent || '0.000',
         
         printPPSTCOIDetails: `Demonstration Teaching Rating: ${inputs.demoTeachingRating}`,
-        printPPSTCOIComp: `(${inputs.demoTeachingRating}/30)*35`,
+        printPPSTCOIComp: `(${inputs.demoTeachingRating}/35)*35`,
         printPPSTCOIScore: document.getElementById('ppstCoiScore')?.textContent || '0.000',
         
         printPPSTNCOIDetails: `TRF Rating: ${inputs.trfRating}`,
-        printPPSTNCOIComp: `(${inputs.trfRating}/20)*25`,
+        printPPSTNCOIComp: `(${inputs.trfRating}/25)*25`,
         printPPSTNCOIScore: document.getElementById('ppstNcoiScore')?.textContent || '0.000',
         
         printTotalScore: document.getElementById('totalScore')?.textContent || '0.000'
@@ -371,13 +374,21 @@ function validateAndSanitizeInput(input) {
     const validationRules = {
         trainingHours: { min: 0, max: 1000 },
         letRating: { min: 0, max: 100 },
-        demoTeachingRating: { min: 0, max: 30 },
-        trfRating: { min: 0, max: 20 }
+        demoTeachingRating: { min: 0, max: 35, maxLength: 5 },
+        trfRating: { min: 0, max: 25, maxLength: 5 }
     };
     
     if (validationRules[id]) {
-        const { min, max } = validationRules[id];
-        sanitizedValue = Math.max(min, Math.min(max, value));
+        const { min, max, maxLength } = validationRules[id];
+        
+        // Check if input exceeds maximum length (for numeric inputs)
+        if (maxLength && input.value.length > maxLength) {
+            // Truncate to maxLength characters
+            input.value = input.value.slice(0, maxLength);
+            sanitizedValue = parseFloat(input.value) || 0;
+        }
+        
+        sanitizedValue = Math.max(min, Math.min(max, sanitizedValue));
     }
     
     if (sanitizedValue !== value) {
@@ -387,21 +398,49 @@ function validateAndSanitizeInput(input) {
     return sanitizedValue;
 }
 
+// Debounce function to prevent lag
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 // Event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    // Auto-calculate on input change
-    document.querySelectorAll('input, select').forEach(element => {
-        element.addEventListener('input', calculateScores);
-        element.addEventListener('change', calculateScores);
-    });
-
+    // Create debounced calculate function
+    const debouncedCalculate = debounce(calculateScores, 300);
+    
     // Input validation for number inputs
     document.querySelectorAll('input[type="number"]').forEach(input => {
         input.addEventListener('focus', () => input.select());
         input.addEventListener('click', () => input.select());
-        input.addEventListener('input', () => validateAndSanitizeInput(input));
-        input.addEventListener('change', () => validateAndSanitizeInput(input));
-        input.addEventListener('blur', () => validateAndSanitizeInput(input));
+        
+        // Validate immediately on input, but debounce calculation
+        input.addEventListener('input', () => {
+            validateAndSanitizeInput(input);
+            debouncedCalculate();
+        });
+        
+        // Calculate immediately on change/blur for final values
+        input.addEventListener('change', () => {
+            validateAndSanitizeInput(input);
+            calculateScores();
+        });
+        input.addEventListener('blur', () => {
+            validateAndSanitizeInput(input);
+            calculateScores();
+        });
+    });
+
+    // Auto-calculate on select change (no debounce needed for selects)
+    document.querySelectorAll('select').forEach(element => {
+        element.addEventListener('change', calculateScores);
     });
 
     // Initial calculation
